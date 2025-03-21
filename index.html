@@ -5,33 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Website untuk menonton anime gratis">
     <title>Anime Tempe</title>
+    <style>
+        body {
+            background-image: url('anime-background.jpg'); /* Ganti dengan nama file gambarmu */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white; /* Biar teks lebih jelas */
+        }
+    </style>
 </head>
 <body style="text-align: center; font-family: Arial, sans-serif;">
     <h1>Selamat Datang di Anime Tempe!</h1>
     <p>Nikmati anime favoritmu secara gratis.</p>
     <a href="detail.html">Tonton Sekarang</a>
-</body> <input type="text" id="searchInput" placeholder="Cari anime..." onkeyup="searchAnime()" style="width: 80%; padding: 8px; margin: 20px 0; font-size: 16px;">
-
-<div id="animeList">
-  <p>One Piece</p>
-  <p>Naruto</p>
-  <p>Attack on Titan</p>
-  <p>My Hero Academia</p>
-  <p>Demon Slayer</p>
-</div>
-
-<script>
-  function searchAnime() {
-    let input = document.getElementById("searchInput").value.toLowerCase();
-    let animeList = document.querySelectorAll("#animeList p");
+    <input type="text" id="searchInput" placeholder="Cari anime..." onkeyup="searchAnime()">
     
-    animeList.forEach(anime => {
-      if (anime.textContent.toLowerCase().includes(input)) {
-        anime.style.display = "block";
-      } else {
-        anime.style.display = "none";
-      }
-    });
-  }
-          </script>
+    <div id="animeList">
+        <p>One Piece</p>
+        <p>Naruto</p>
+        <p>Attack on Titan</p>
+        <p>My Hero Academia</p>
+        <p>Demon Slayer</p>
+    </div>
+
+    <script>
+        function searchAnime() {
+            let input = document.getElementById("searchInput").value.toLowerCase();
+            let animeList = document.querySelectorAll("#animeList p");
+
+            animeList.forEach(anime => {
+                if (anime.textContent.toLowerCase().includes(input)) {
+                    anime.style.display = "block";
+                } else {
+                    anime.style.display = "none";
+                }
+            });
+        }
+    </script>
+</body>
 </html>
