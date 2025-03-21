@@ -3,43 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Website untuk menonton anime gratis">
+    <meta name="description" content="Website untuk nonton anime gratis">
     <title>Anime Tempe</title>
     <style>
+        /* Gaya Umum */
         body {
-            background-image: url('anime-background.jpg'); /* Ganti dengan nama file gambarmu */
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: white; /* Biar teks lebih jelas */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f0f0f0;
+        }
+        /* Header */
+        .header {
+            background: #1c1c1c;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+        }
+        /* Search Bar dan Filter */
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+        }
+        input[type="text"], select {
+            padding: 8px;
+            margin: 0 5px;
+            width: 200px;
+        }
+        /* Grid Anime */
+        .anime-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            padding: 15px;
+        }
+        .anime-card {
+            background: white;
+            border: 1px solid #ccc;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+        }
+        .anime-card img {
+            width: 100%;
+            height: auto;
+        }
+        .anime-title {
+            padding: 10px;
+            font-weight: bold;
         }
     </style>
 </head>
-<body style="text-align: center; font-family: Arial, sans-serif;">
-    <h1>Selamat Datang di Anime Tempe!</h1>
-    <p>Nikmati anime favoritmu secara gratis.</p>
-    <a href="detail.html">Tonton Sekarang</a>
-    <input type="text" id="searchInput" placeholder="Cari anime..." onkeyup="searchAnime()">
-    
-    <div id="animeList">
-        <p>One Piece</p>
-        <p>Naruto</p>
-        <p>Attack on Titan</p>
-        <p>My Hero Academia</p>
-        <p>Demon Slayer</p>
+<body>
+    <!-- Header -->
+    <div class="header">
+        Anime Tempe
     </div>
 
+    <!-- Search dan Filter -->
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Cari anime..." onkeyup="searchAnime()">
+        <select id="genreFilter" onchange="filterGenre()">
+            <option value="all">Semua Genre</option>
+            <option value="action">Action</option>
+            <option value="adventure">Adventure</option>
+            <option value="romance">Romance</option>
+        </select>
+    </div>
+
+    <!-- Daftar Anime -->
+    <div id="animeGrid" class="anime-grid">
+        <div class="anime-card" data-genre="action">
+            <img src="onepiece.jpg" alt="One Piece">
+            <div class="anime-title">One Piece</div>
+        </div>
+        <div class="anime-card" data-genre="adventure">
+            <img src="naruto.jpg" alt="Naruto">
+            <div class="anime-title">Naruto</div>
+        </div>
+        <div class="anime-card" data-genre="romance">
+            <img src="kimi-no-na-wa.jpg" alt="Kimi no Na wa">
+            <div class="anime-title">Kimi no Na wa</div>
+        </div>
+    </div>
+
+    <!-- Script untuk Pencarian dan Filter -->
     <script>
         function searchAnime() {
             let input = document.getElementById("searchInput").value.toLowerCase();
-            let animeList = document.querySelectorAll("#animeList p");
+            let animeCards = document.querySelectorAll(".anime-card");
 
-            animeList.forEach(anime => {
-                if (anime.textContent.toLowerCase().includes(input)) {
-                    anime.style.display = "block";
-                } else {
-                    anime.style.display = "none";
-                }
+            animeCards.forEach(card => {
+                let title = card.querySelector(".anime-title").textContent.toLowerCase();
+                card.style.display = title.includes(input) ? "block" : "none";
+            });
+        }
+
+        function filterGenre() {
+            let selectedGenre = document.getElementById("genreFilter").value;
+            let animeCards = document.querySelectorAll(".anime-card");
+
+            animeCards.forEach(card => {
+                let genre = card.getAttribute("data-genre");
+                card.style.display = (selectedGenre === "all" || genre === selectedGenre) ? "block" : "none";
             });
         }
     </script>
