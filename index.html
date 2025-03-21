@@ -97,7 +97,7 @@
 
             animeCards.forEach(card => {
                 let title = card.querySelector(".anime-title").textContent.toLowerCase()
-card.style.display = title.includes(input) ? "block" : "none";
+card.style.display = title.includes(searchText) ? "flex" : "none";
             }); 
         }
 
